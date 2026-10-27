@@ -7,7 +7,7 @@ Esta carpeta es el proyecto de la app Android. GitHub la compila gratis y te da 
 1. Entra a https://github.com e inicia sesión (o crea una cuenta gratis).
 2. Toca **New repository**. Ponle de nombre `mis-lideres-apk`, déjalo en **Public** y toca **Create repository**.
 3. Toca **uploading an existing file**. Descomprime el zip y arrastra estos elementos:
-   `www` (carpeta), `resources` (carpeta), `package.json` y `capacitor.config.json`.
+   `www` (carpeta), `resources` (carpeta), `package.json`, `capacitor.config.json` y `debug.keystore` (es la firma de la app; debe estar siempre en el repositorio).
    Toca **Commit changes**.
 
 ## 2. Crear el compilador automático
@@ -32,13 +32,17 @@ Cuando termine, tu APK queda en este enlace (cambia `TU-USUARIO` por tu usuario 
 
 `https://github.com/TU-USUARIO/mis-lideres-apk/releases/download/apk/MisLideres.apk`
 
-Envía ese enlace a tus líderes por WhatsApp. También puedes bajar el archivo y enviarlo directamente. El repositorio debe ser **Public** para que ellos puedan descargarlo sin cuenta.
+Envía ese enlace a tus líderes por WhatsApp. Si WhatsApp no deja enviar el archivo `.apk`, envía solo el enlace y que lo abran desde Chrome. También puedes bajar el archivo y enviarlo directamente. El repositorio debe ser **Public** para que ellos puedan descargarlo sin cuenta.
 
 ## 5. Instalar en cada teléfono Android
 
 1. Descargar el archivo `MisLideres.apk`.
 2. Abrirlo. Android pedirá permitir instalar apps de esta fuente (Chrome, WhatsApp o Archivos). Se activa una sola vez.
 3. Tocar **Instalar**.
+
+Descarga siempre el archivo `MisLideres.apk` desde el enlace de arriba. No sirve el "Source code (zip)" de la página de GitHub ni un archivo que termine en `.zip` o `.apk.1`.
+
+**Si ya tenían una versión anterior instalada:** desinstalarla una sola vez antes de instalar esta (se pierde la lista, pero se puede volver a cargar desde Excel). Desde esta versión en adelante, las actualizaciones se instalan encima sin perder nada.
 
 ## Cargar una lista desde Excel
 
@@ -65,8 +69,15 @@ Envía ese enlace a tus líderes por WhatsApp. También puedes bajar el archivo 
 - **Reiniciar progreso** quita todas las marcas, para hacer un envío nuevo.
 - El teléfono pide que toques **Enviar** en WhatsApp y en Mensajes por cada líder. Ninguna app web puede enviar mensajes sin que lo confirmes.
 
+## Si el teléfono dice "problema con el paquete"
+
+- **App no instalada / entra en conflicto con un paquete existente:** hay una versión vieja con otra firma. Desinstala la app y vuelve a instalar.
+- **Hubo un problema al analizar el paquete:** el archivo no es el APK o se descargó incompleto. Descárgalo de nuevo desde el enlace de GitHub y comprueba que se llame `MisLideres.apk` y pese unos 4 a 6 MB.
+- Si lo recibieron por WhatsApp, pídeles que lo bajen mejor desde el enlace en Chrome.
+- Si sigue igual, dime el mensaje exacto que sale en el teléfono y la versión de Android.
+
 ## Si algo falla
 
 - Si el proceso en **Actions** sale con una X roja, entra a él, copia las últimas líneas del error y envíamelas.
 - Cada líder tiene su propia lista, guardada en su teléfono. Si desinstala la app, la pierde.
-- Si ya habías subido la versión anterior, reemplaza `www/index.html` en tu repositorio por el nuevo (en GitHub: abre el archivo, toca el lápiz, borra todo, pega el nuevo y **Commit changes**). Se vuelve a compilar solo y el enlace de descarga sigue igual. Tus líderes instalan el APK nuevo encima del anterior y conservan su lista.
+- Si ya habías subido la versión anterior, reemplaza `www/index.html` en tu repositorio por el nuevo (en GitHub: abre el archivo, toca el lápiz, borra todo, pega el nuevo y **Commit changes**). Se vuelve a compilar solo y el enlace de descarga sigue igual. Después de la desinstalación única de arriba, tus líderes instalan cada APK nuevo encima del anterior y conservan su lista.
