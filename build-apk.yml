@@ -37,6 +37,14 @@ jobs:
       - name: Copiar la app al proyecto
         run: npx cap sync android
 
+      - name: Usar siempre la misma firma
+        run: |
+          mkdir -p ~/.android
+          cp debug.keystore ~/.android/debug.keystore
+
+      - name: Subir el número de versión en cada compilación
+        run: sed -i -E "s/versionCode [0-9]+/versionCode ${{ github.run_number }}/" android/app/build.gradle
+
       - name: Aceptar licencias del SDK
         run: yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses > /dev/null || true
 
@@ -45,12 +53,6 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew assembleDebug --no-daemon
-
-      - name: Guardar APK como archivo del workflow
-        uses: actions/upload-artifact@v4
-        with:
-          name: MisLideres-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
 
       - name: Publicar enlace de descarga
         env:
